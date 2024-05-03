@@ -4,9 +4,7 @@ import GameStartScreen from "./screens/GameStartScreen";
 
 export default function App() {
   return (
-    <View>
-      <GameStartScreen />
-    </View>
+    <GameStartScreen/>
   );
 }
 
