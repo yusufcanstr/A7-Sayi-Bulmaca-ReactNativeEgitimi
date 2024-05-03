@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
 import React, { useState } from "react";
 import CustomButton from "../components/CustomButton";
 
-export default function GameStartScreen() {
+export default function GameStartScreen({ onSendNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
   function resetHandler() {
@@ -15,13 +15,15 @@ export default function GameStartScreen() {
         {
           text: "Tamam",
           style: "destructive",
-          onPress: resetHandler
+          onPress: resetHandler,
         },
       ]);
+      return;
     }
+    onSendNumber(chosenNumber);
   }
   function numberHandler(text) {
-    console.log(text);
+    //console.log(text);
     setEnteredNumber(text);
   }
 
