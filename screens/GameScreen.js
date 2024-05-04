@@ -71,7 +71,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
           </CustomButton>
         </View>
       </View>
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
           data={guessCounts} // görüntülenecek veri dizisi
           keyExtractor={(itemData) => itemData} // her öğe için benzersiz bir anahtar belirleme
@@ -117,4 +117,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 10,
   },
+  listContainer: {
+    flex: 1,
+    
+  }
 });
