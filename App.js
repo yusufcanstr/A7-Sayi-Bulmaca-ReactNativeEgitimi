@@ -9,14 +9,16 @@ import { useState } from "react";
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(true);
+  const [guessCounts, setGuessCounts] = useState(0)
 
   function sendedNumberHandler(sendedNumber) {
     setUserNumber(sendedNumber);
     setGameIsOver(false);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(numberofGuess) { // Kaç tahminde geldiği bize yollandı onGameOver da 
     setGameIsOver(true);
+    setGuessCounts(numberofGuess);
   }
 
   let screen = <GameStartScreen onSendNumber={sendedNumberHandler} />;
@@ -27,7 +29,7 @@ export default function App() {
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = <GameOverScreen roundsNumber={guessCounts} userNumber={userNumber}/>;
   }
 
   return (

@@ -3,7 +3,7 @@ import React from "react";
 import CustomButton from "../components/CustomButton";
 import Title from "../components/Title";
 
-export default function GameOverScreen() {
+export default function GameOverScreen({ roundsNumber, userNumber }) {
   return (
     <View style={styles.container}>
       <Title>Oyun Tamamlandı !</Title>
@@ -11,8 +11,8 @@ export default function GameOverScreen() {
         <Image style={styles.image} source={require("../assets/success.jpg")} />
       </View>
       <Text style={styles.result}>
-        <Text style={styles.countAndNumber}>10</Text> Deneme ile buldun.
-        <Text style={styles.countAndNumber}>50</Text> Sayısını buldun
+        <Text style={styles.countAndNumber}>{roundsNumber}</Text> Deneme ile buldun.
+        <Text style={styles.countAndNumber}>{userNumber}</Text> Sayısını buldun
       </Text>
       <CustomButton>Yeni Oyuna Başla</CustomButton>
     </View>

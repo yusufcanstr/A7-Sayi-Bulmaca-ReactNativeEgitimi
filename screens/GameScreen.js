@@ -11,12 +11,18 @@ let maxNumber = 99;
 export default function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateNumber(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessCounts, setGuessCounts] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      onGameOver();
+      onGameOver(guessCounts.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
+
+  useEffect(() => {
+    minNumber = 1;
+    maxNumber = 99;
+  }, []);
 
   function nextGuesssHandler(direction) {
     if (
@@ -36,6 +42,8 @@ export default function GameScreen({ userNumber, onGameOver }) {
     }
     const newRandomNumber = generateNumber(minNumber, maxNumber, currentGuess);
     setCurrentGuess(newRandomNumber);
+
+    setGuessCounts((prevGuess) => [newRandomNumber, ...prevGuess]); // Array taminler ekleniyor.
   }
 
   function generateNumber(min, max, exclude) {
@@ -72,12 +80,12 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   buttonsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     //justifyContent:'space-between',
     //paddingHorizontal: 60,
   },
   card: {
-    backgroundColor : 'orange',
+    backgroundColor: "orange",
     padding: 16,
     marginTop: 20,
     elevation: 4,
@@ -86,12 +94,12 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 0.25,
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    color: 'white',
+    color: "white",
     fontSize: 24,
     marginBottom: 10,
-  }
+  },
 });
