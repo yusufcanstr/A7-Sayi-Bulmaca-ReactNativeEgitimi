@@ -23,8 +23,8 @@ export default function App() {
   }
 
   function startNewGameHandler() {
-    setUserNumber(null);
-    setGuessCounts(0);
+    setUserNumber(null); // userNumber null eşit olduğunda zaten oyun tekrar başlayacak
+    setGuessCounts(0); // kaç taminde bildiğimizi 0 yapıyoruz
   }
 
   let screen = <GameStartScreen onSendNumber={sendedNumberHandler} />;
