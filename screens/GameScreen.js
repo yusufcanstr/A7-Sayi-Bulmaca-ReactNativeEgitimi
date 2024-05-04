@@ -1,15 +1,21 @@
 import { Alert, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../components/Title";
 import ComputerNumber from "../components/ComputerNumber";
 import CustomButton from "../components/CustomButton";
 
-export default function GameScreen({ userNumber }) {
+let minNumber = 1;
+let maxNumber = 99;
+
+export default function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateNumber(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
-  let minNumber = 1;
-  let maxNumber = 99;
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      onGameOver();
+    }
+  }, [currentGuess, userNumber, onGameOver]);
 
   function nextGuesssHandler(direction) {
     if (
@@ -17,7 +23,7 @@ export default function GameScreen({ userNumber }) {
       (direction == "greater" && currentGuess > userNumber)
     ) {
       Alert.alert("Hadi Oradan!", "Yanlış olduğunu bile bile basıyorsun !!!", [
-        {text:'Tamam', style:'cancel'},
+        { text: "Tamam", style: "cancel" },
       ]);
       return;
     }
