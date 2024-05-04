@@ -9,16 +9,22 @@ import { useState } from "react";
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(true);
-  const [guessCounts, setGuessCounts] = useState(0)
+  const [guessCounts, setGuessCounts] = useState(0);
 
   function sendedNumberHandler(sendedNumber) {
     setUserNumber(sendedNumber);
     setGameIsOver(false);
   }
 
-  function gameOverHandler(numberofGuess) { // Kaç tahminde geldiği bize yollandı onGameOver da 
+  function gameOverHandler(numberofGuess) {
+    // Kaç tahminde geldiği bize yollandı onGameOver da
     setGameIsOver(true);
     setGuessCounts(numberofGuess);
+  }
+
+  function startNewGameHandler() {
+    setUserNumber(null);
+    setGuessCounts(0);
   }
 
   let screen = <GameStartScreen onSendNumber={sendedNumberHandler} />;
@@ -28,8 +34,14 @@ export default function App() {
     );
   }
 
-  if (gameIsOver && userNumber) {
-    screen = <GameOverScreen roundsNumber={guessCounts} userNumber={userNumber}/>;
+  if (gameIsOver && userNumber) { // userNumber null ise oyunu başlat ve gameIsOver ==== true ise 
+    screen = (
+      <GameOverScreen
+        roundsNumber={guessCounts}
+        userNumber={userNumber}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
 
   return (
